@@ -28,15 +28,10 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.user_id = current_user.id
-
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
+    if @answer.save
+      redirect_to questions_path
+    else
+      render :new
     end
   end
 
@@ -45,7 +40,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       @question = Question.find(params[:question_id])
-      @answer = Answer.find(params[:id])
+      @answer = @question.answers.find(params[:id])
       if @answer.update(answer_params)
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }

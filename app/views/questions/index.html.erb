@@ -3,14 +3,6 @@
 <h1>Questions</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>User Name</th>
-      <th>Created At</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @questions.each do |question| %>
@@ -20,6 +12,12 @@
         <td><%= question.content %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add Answer', new_question_answer_path(question) %></td>
+      </tr>
+      <tr>
+        <td colspan="1"><%= question.answers.first %><br><%= question.answers.first.content %></td>
+        <td colspan="2">OR<br><%= question.vote_count %></td>
+        <td colspan="1"><%= question.answers.last.image %><br><%= question.answers.first.content %></td>
       </tr>
     <% end %>
   </tbody>
