@@ -14,7 +14,8 @@ class AnswersController < ApplicationController
 
   # GET /answers/new
   def new
-    @answer = Answer.new
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.new
   end
 
   # GET /answers/1/edit
@@ -24,7 +25,9 @@ class AnswersController < ApplicationController
   # POST /answers
   # POST /answers.json
   def create
-    @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.new(answer_params)
+    @answer.user_id = current_user.id
 
     respond_to do |format|
       if @answer.save
@@ -41,6 +44,8 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1.json
   def update
     respond_to do |format|
+      @question = Question.find(params[:question_id])
+      @answer = Answer.find(params[:id])
       if @answer.update(answer_params)
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
@@ -54,6 +59,7 @@ class AnswersController < ApplicationController
   # DELETE /answers/1
   # DELETE /answers/1.json
   def destroy
+    @answer = Answer.find(params[:id])
     @answer.destroy
     respond_to do |format|
       format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }

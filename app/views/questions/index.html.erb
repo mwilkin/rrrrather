@@ -18,7 +18,6 @@
         <td><%= question.user.name %></td>
         <td><%= question.created_at %></td>
         <td><%= question.content %></td>
-        <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
