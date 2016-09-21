@@ -28,12 +28,11 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
-    binding.pry
 
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }

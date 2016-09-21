@@ -5,24 +5,21 @@
 <table>
 
   <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.user.name %></td>
-        <td><%= question.created_at %></td>
-        <td><%= question.content %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add Answer', new_question_answer_path(question) %></td>
-      </tr>
-      <tr>
-        <td colspan="1"><%= question.answers.first %><br><%= question.answers.first.content %></td>
-        <td colspan="2">OR<br><%= question.vote_count %></td>
-        <td colspan="1"><%= question.answers.last.image %><br><%= question.answers.first.content %></td>
-      </tr>
-    <% end %>
+    <div class="question_list">
+      <% @questions.each do |question| %>
+        <tr>
+          <td><%= question.user.name %></td>
+          <td><%= question.created_at %></td>
+          <td><%= question.content %></td>
+          <td><%= link_to 'Edit', edit_question_path(question) %></td>
+          <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Add Answer', new_question_answer_path(question) %></td>
+        </tr>
+      <% end %>
+    </div>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'New Question', new_question_path, id: "new_question_link", remote: true %>

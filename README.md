@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+<!-- <tr>
+  <td colspan="1"><%= question.answers.first %><br><%= question.answers.first.content %></td>
+  <td colspan="2">OR<br><%= question.vote_count %></td>
+  <td colspan="1"><%= question.answers.last.image %><br><%= question.answers.first.content %></td>
+</tr> -->
